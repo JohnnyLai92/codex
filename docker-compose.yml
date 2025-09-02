@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  codex-dev:
+    # Mirrors .devcontainer image for Rust development
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    platform: ${PLATFORM:-linux/arm64}
+    environment:
+      # Backtraces for easier debugging
+      - RUST_BACKTRACE=1
+      # Ensure container builds write to a separate target dir
+      - CARGO_TARGET_DIR=${CARGO_TARGET_DIR:-/workspace/codex-rs/target-arm64}
+    working_dir: /workspace
+    # Use the non-root user defined in the Dockerfile
+    user: "ubuntu"
+    volumes:
+      # Mount entire repo into /workspace
+      - ./:/workspace:cached
+    # Optional: keep the container running to attach shells
+    tty: true
+    stdin_open: true
+
+    # If you need to run on x86_64 hosts without ARM emulation, override:
+    #   PLATFORM=linux/amd64 CARGO_TARGET_DIR=/workspace/codex-rs/target-amd64 docker compose up -d
+
+# No named volumes by default; build artifacts live in the mounted workspace.
+
