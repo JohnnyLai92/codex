@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <h1 align="center">OpenAI Codex CLI（繁體中文）</h1>
+=======
+<h1 align="center">OpenAI Codex CLI-0902</h1>
+>>>>>>> 4a3c0836b22b133199d446ed18ff8497853f9fbe
 
 <p align="center"><code>npm i -g @openai/codex</code><br />或 <code>brew install codex</code></p>
 
